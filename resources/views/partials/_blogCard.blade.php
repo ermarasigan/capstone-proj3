@@ -12,7 +12,7 @@
   {{-- CARD IMAGE --}}
   <div class="card-image waves-effect waves-block waves-light tooltipped" 
     data-position="bottom" data-delay="50" data-tooltip="Read more">
-    <img class="activator" src="img/uploads/ICTJUNE.png">
+    <img class="activator" src="{{ asset($blog->image_url) }}">
   </div>
 
   {{-- CARD CONTENT --}}
@@ -24,13 +24,15 @@
     <i>Posted {{ $blog->created_at->diffForHumans() }}</i>
     {{-- BLOG TAGS --}}
     @foreach($blog->tag as $blogtag)
-      <div class="chip">
-        {{$blogtag->name}}
-        <i id="{{$blog->id . "-" . $blogtag->id}}" 
-          class="close material-icons removeTagBtn">
-          close
-        </i>
-      </div>
+      <a href="/tag/{{$blogtag->id}}">
+        <div class="chip">
+          {{$blogtag->name}}
+          <i id="{{$blog->id . "-" . $blogtag->id}}" 
+            class="close material-icons removeTagBtn">
+            close
+          </i>
+        </div>
+      </a>
     @endforeach
     {{-- BLOG 1ST PARAGRAPH --}}
     <p>

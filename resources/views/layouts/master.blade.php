@@ -7,13 +7,13 @@
   <title>@yield("title")</title>
 
   {{-- Materialize JS --}}
-  <script src="js/jquery-2.1.1.min.js"></script>
-  <script src="js/materialize.js"></script>
+  <script src="{{ asset('js/jquery-2.1.1.min.js') }}"></script>
+  <script src="{{ asset('js/materialize.js') }}"></script>
 
   {{-- CSS --}}
-  <link href="iconfont/material-icons.css" type="text/css" rel="stylesheet"/>
-  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="{{ asset('iconfont/material-icons.css') }}" type="text/css" rel="stylesheet"/>
+  <link href="{{ asset('css/materialize.css') }}" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="{{ asset('css/style.css') }}" type="text/css" rel="stylesheet" media="screen,projection"/>
 
   {{-- FACEBOOK OPENGRAPH--}}
   <meta property="og:url"           content="http://www.your-domain.com/your-page.html" />
@@ -61,7 +61,7 @@
   @include("partials/_footer")
 
   <!--  Scripts-->
-  <script src="js/init.js"></script>
+  <script src="{{ asset('js/init.js') }}"></script>
 
   </body>
 </html>

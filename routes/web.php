@@ -17,6 +17,8 @@ Route::get('/', function () {
 
 Route::get('/', 'BlogController@showBlogs');
 
+Route::get('/tag/{id}', 'TagController@showBlogs');
+
 Route::group(['middleware' => ['web']], function(){
 	Route::post('/removeTag', 'BlogController@removeTag');
 });

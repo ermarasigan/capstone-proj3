@@ -11,7 +11,12 @@
 
   {{-- CONTENT HEADER --}}
   <h4 class="center-align cyan-text text-darken-3">
-    <b>BLOGS</b>  
+    <b>
+    BLOGS
+    @if($title=='Tagged Blogs (Ready to Gov)')
+      tagged as 
+    @endif
+    </b>  
     <a class="btn btn-floating blue waves-effect waves-light modal-trigger tooltipped" 
       data-position="right" data-delay="50" data-tooltip="Add Blog" href="#modal_add">
       <i class="material-icons">add</i>
@@ -21,10 +26,20 @@
   {{-- TAG CHIPS --}}
   TAGS 
   @foreach($tags as $tag)
-    <div class="chip">
-      {{$tag->name}}
-    </div>
+    <a href="/tag/{{$tag->id}}">
+      <div class="chip">
+        {{$tag->name}}
+      </div>
+    </a>
   @endforeach
+
+  @if($title=='Tagged Blogs (Ready to Gov)')
+    <a href="/">
+      <div class="chip teal lighten-2">
+        {{ "ALL" }} 
+      </div>
+    </a>
+  @endif
 
   {{-- DIVIDER LINE --}}
   <div class="divider topdivider"></div>
@@ -62,7 +77,7 @@
     <div class="divider topdivider"></div>
     <div class="card">
       <div class="card-image">
-        <img src="img/placeholder.png">
+        <img src=" {{ asset('img/placeholder.png') }}">
         <span class="card-title">Card Title</span>
       </div>
       <div class="card-content">
