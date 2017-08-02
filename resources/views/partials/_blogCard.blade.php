@@ -59,19 +59,21 @@
   </div>
 
   {{-- CARD ACTION --}}
-  <div class="card-action right-align grey lighten-2">
-    <div class="left-align">
-      <a class="waves-effect waves-light btn red lighten-2 modal-trigger tooltipped" data-position="bottom" data-delay="50" data-tooltip="Delete Blog" href="{{ "#modal_del" . $blog->id }}">
-        <i class="material-icons">delete</i>
-      </a>
-      <a class="waves-effect waves-light btn orange lighten-2 modal-trigger tooltipped" data-position="bottom" data-delay="50" data-tooltip="Add Tag" href="{{ "#modal_tag" . $blog->id }}">
-        <i class="material-icons">note_add</i>
-      </a>
-      <a class="waves-effect waves-light btn blue lighten-2 modal-trigger tooltipped" data-position="bottom" data-delay="50" data-tooltip="Edit Blog" href="{{ "#modal_edit" . $blog->id }}">
-        <i class="material-icons">border_color</i>
-      </a>
+  @if(Auth::user() && Auth::user()->role == 'admin')
+    <div class="card-action right-align grey lighten-2">
+      <div class="left-align">
+        <a class="waves-effect waves-light btn red lighten-2 modal-trigger tooltipped" data-position="bottom" data-delay="50" data-tooltip="Delete Blog" href="{{ "#modal_del" . $blog->id }}">
+          <i class="material-icons">delete</i>
+        </a>
+        <a class="waves-effect waves-light btn orange lighten-2 modal-trigger tooltipped" data-position="bottom" data-delay="50" data-tooltip="Add Tag" href="{{ "#modal_tag" . $blog->id }}">
+          <i class="material-icons">note_add</i>
+        </a>
+        <a class="waves-effect waves-light btn blue lighten-2 modal-trigger tooltipped" data-position="bottom" data-delay="50" data-tooltip="Edit Blog" href="{{ "#modal_edit" . $blog->id }}">
+          <i class="material-icons">border_color</i>
+        </a>
+      </div>
     </div>
-  </div>
+  @endif
 </div> {{-- /BLOG CARD --}}
 
 <h5><br></h5>

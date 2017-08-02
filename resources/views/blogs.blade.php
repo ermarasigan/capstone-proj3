@@ -16,11 +16,13 @@
     @if($title=='Tagged Blogs (Ready to Gov)')
       tagged as 
     @endif
-    </b>  
-    <a class="btn btn-floating blue waves-effect waves-light modal-trigger tooltipped" 
-      data-position="right" data-delay="50" data-tooltip="Add Blog" href="#modal_add">
-      <i class="material-icons">add</i>
-    </a>
+    </b>
+    @if(Auth::user() && Auth::user()->role == 'admin')
+      <a class="btn btn-floating blue waves-effect waves-light modal-trigger tooltipped" 
+        data-position="right" data-delay="50" data-tooltip="Add Blog" href="#modal_add">
+        <i class="material-icons">add</i>
+      </a>
+    @endif
   </h4>
 
   {{-- TAG CHIPS --}}
