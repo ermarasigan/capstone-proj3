@@ -27,34 +27,35 @@
       content = $('#newBlogContent').val();
 
       // Ajax function to add tag, post method
-        $.ajax({
-          url: "/newBlog",
-          method: "POST",
-          data: {
-            title     : title,
-            content   : content,
-            _token    : token
-          },
-          success: function(data){
-            console.log(data);
-            if (typeof data.response != 'undefined'){
-              if(data.response == 'success'){
-                $('#newBlogContent').val('')
-                $('#newBlogTitle').val('')
-                Materialize.toast('New blog added',1000)
-                setTimeout(function(){ location.reload(); }, 1000);
-              } else {
-                console.log(data.response)          
-              }
+      $.ajax({
+        url: "/newBlog",
+        method: "POST",
+        data: {
+          title     : title,
+          content   : content,
+          _token    : token
+        },
+        success: function(data){
+          console.log(data);
+          if (typeof data.response != 'undefined'){
+            if(data.response == 'success'){
+              $('#newBlogContent').val('')
+              $('#newBlogTitle').val('')
+              // Materialize.toast('New blog added',2000)
+              $('#uploadimage').submit();
+              // setTimeout(function(){ location.reload(); }, 2000);
             } else {
-              console.log('no return')
+              console.log(data.response)          
             }
-          },
-          error: function(response,data){
-            console.log(response)
-            console.log(data)
+          } else {
+            console.log('no return')
           }
-        })
+        },
+        error: function(response,data){
+          console.log(response)
+          console.log(data)
+        }
+      })
     });
 
     // AJAX Function to delete blog
@@ -113,9 +114,9 @@
             console.log(data);
             if (typeof data.response != 'undefined'){
               if(data.response == 'success'){
-                
-                Materialize.toast('Blog updated',1000)
-                setTimeout(function(){ location.reload(); }, 1000);
+                $('#uploadimage' + blogID).submit();
+                Materialize.toast('Blog updated',2000)
+                // setTimeout(function(){ location.reload(); }, 1000);
               } else {
                 console.log(data.response)          
               }
@@ -201,6 +202,5 @@
         })
     });
 
-    
   }); // end of document ready
 })(jQuery); // end of jQuery name space

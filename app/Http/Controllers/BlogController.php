@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Blog;
 use App\Tag;
+use Session;
 
 class BlogController extends Controller
 {
@@ -43,18 +44,6 @@ class BlogController extends Controller
         } 
     }
 
-    function newBlog(Request $request){
-        // Create new blog
-        $new_blog = new Blog();
-        $new_blog->title = $request->title;
-        $new_blog->content = $request->content;
-        $new_blog->save();
-
-        // Output response to send to ajax
-        return response()->json(['response' => 'success']);
-        return redirect('home');
-    }
-
     function deleteBlog(Request $request){
         // Find blog to be deleted
         $blogID = $request->blogID;
@@ -77,6 +66,9 @@ class BlogController extends Controller
         $blog_tbe->title = $request->editTitle;
         $blog_tbe->content = $request->editContent;
         $blog_tbe->save();
+
+        // Save new blog ID to add image later
+        $request->session()->flash('updateBlogID',$blog_tbe->id);
 
         // Output response to send to ajax
         return response()->json(['response' => 'success']);
@@ -131,4 +123,54 @@ class BlogController extends Controller
         // return redirect('/home');
     }
 
+    function newBlog(Request $request){
+        // Create new blog
+        $new_blog = new Blog();
+        $new_blog->title = $request->title;
+        $new_blog->content = $request->content;
+        $new_blog->image_url = 'img/uploads/ICTJUNE.png';
+        $new_blog->save();
+
+        // Save new blog ID to add image later
+        $request->session()->flash('newBlogID',$new_blog->id);
+
+        // Output response to send to ajax
+        return response()->json(['response' => 'success']);
+        // return redirect('home');
+    }
+
+    function fileUpload(Request $request)
+
+    {
+        $newBlogID = Session::get('newBlogID');
+        $updateBlogID = Session::get('updateBlogID');
+
+        if(isset($newBlogID)){
+            $blogID = $newBlogID;
+        } else {
+            $blogID = $updateBlogID;
+        }
+
+        if ($request->isMethod('post')){
+
+            $this->validate($request, [
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+
+            // Upload image with timestamp as filename
+            $image = $request->file('image');
+            $input['imagename'] = time().'.'. $image->getClientOriginalExtension();
+            $destinationPath = public_path('img\uploads');
+            $image->move($destinationPath, $input['imagename']);
+
+            // Update blog with the uploaded image
+            $filename = "img/uploads/" . $input['imagename'];
+            $blog_tbu = Blog::find($blogID);
+            $blog_tbu->image_url = $filename;
+            $blog_tbu->save();
+
+            // return response()->json(['response' => 'success']);
+            return back()->with('success','Image Upload successful');
+        }
+    }
 }

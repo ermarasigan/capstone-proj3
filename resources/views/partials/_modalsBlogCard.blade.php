@@ -17,17 +17,25 @@
   <div class="modal-content">
     <h4>Edit Blog</h4>
       <div class="row">
-        <form class="col s12">
-          <div class="row">
-            <div class="input-field col s12">
-              <input id="{{ "edit_title" . $blog->id }}" type="text" data-length="100" value="{{ $blog->title }}">
-              <label for="input_text">Blog Title</label>
+        <div class="input-field col s12">
+          <input id="{{ "edit_title" . $blog->id }}" type="text" data-length="100" value="{{ $blog->title }}">
+          <label for="input_text">Blog Title</label>
+        </div>
+      
+        <div class="input-field col s12">
+          <textarea id="{{ "edit_content" . $blog->id }}" class="materialize-textarea" data-length="3000">{{ $blog->content }}</textarea>
+          <label for="textarea1">Blog Content</label>
+        </div>
+
+        <form id="{{ "uploadimage" . $blog->id }}" action="/fileUpload" method="post" enctype="multipart/form-data">
+          {{ csrf_field() }}
+          <div class="file-field input-field col s12">
+            <div class="btn">
+              <span>File</span>
+              <input type="file" name="image" required>
             </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s12">
-              <textarea id="{{ "edit_content" . $blog->id }}" class="materialize-textarea" data-length="3000">{{ $blog->content }}</textarea>
-              <label for="textarea1">Blog Content</label>
+            <div class="file-path-wrapper">
+              <input class="file-path validate" type="text" placeholder="Upload image (max size 2MB)">
             </div>
           </div>
         </form>

@@ -32,4 +32,6 @@ Route::post('/editBlog', 'BlogController@editBlog');
 
 Route::post('/addTag', 'BlogController@addTag');
 
+Route::post('/fileUpload', 'BlogController@fileUpload');
+
 // Route::get('/home', 'HomeController@index')->name('home');
