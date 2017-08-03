@@ -83,18 +83,16 @@
         <span class="card-title">Card Title</span>
       </div>
       <div class="card-content">
-        {{-- <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p> --}}
         <form action="#">
-    <p>
-      <input type="checkbox" id="test5" {{ "checked" }}/>
-      <label for="test5">Reqt 1</label>
-    </p>
-    <p>
-      <input type="checkbox" id="test6" />
-      <label for="test6">Reqt 2</label>
-    </p>
-  </form>
-  
+          <p>
+            <input type="checkbox" id="test5" {{ "checked" }}/>
+            <label for="test5">Reqt 1</label>
+          </p>
+          <p>
+            <input type="checkbox" id="test6" />
+            <label for="test6">Reqt 2</label>
+          </p>
+        </form>
       </div>
       <div class="card-action">
         <a href="#">This is a link</a>

@@ -24,15 +24,19 @@
     <i>Posted {{ $blog->created_at->diffForHumans() }}</i>
     {{-- BLOG TAGS --}}
     @foreach($blog->tag as $blogtag)
-      <a href="/tag/{{$blogtag->id}}">
-        <div class="chip">
+      <div class="chip">
+        <a href="/tag/{{$blogtag->id}}">
           {{$blogtag->name}}
+        </a>
           <i id="{{$blog->id . "-" . $blogtag->id}}" 
-            class="close material-icons removeTagBtn">
+            class="close material-icons removeTagBtn
+            @if($title=='Tagged Blogs (Ready to Gov)')
+              {{ "hide" }}
+            @endif
+            ">
             close
           </i>
-        </div>
-      </a>
+      </div>
     @endforeach
     {{-- BLOG 1ST PARAGRAPH --}}
     <p>
