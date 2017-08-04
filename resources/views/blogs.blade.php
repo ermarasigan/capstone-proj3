@@ -74,29 +74,57 @@
 
 {{-- ASIDE SECTION --}}
 @section("aside")
+  
+  
+
+    
+      
   <div id="aside">
     <h4 class="center-align amber-text text-darken-1"><b>GUIDES</b></h4>
     <div class="divider topdivider"></div>
-    <div class="card">
+
+    @foreach($alldocs as $doc)
+      @if(isset($doc->icon))
+
+    <div class="card" id="{{$doc->id}}">
       <div class="card-image">
         <img src=" {{ asset('img/placeholder.png') }}">
-        <span class="card-title">Card Title</span>
+        <span class="card-title align-center"><i class="material-icons">{{$doc->icon}}</i>{{ $doc->label }}</span>
       </div>
       <div class="card-content">
         <form action="#">
-          <p>
+          {{-- <p>
             <input type="checkbox" id="test5" {{ "checked" }}/>
             <label for="test5">Reqt 1</label>
           </p>
           <p>
             <input type="checkbox" id="test6" />
             <label for="test6">Reqt 2</label>
+          </p> --}}
+          {{-- {{ $doc->reqt }}
+          @if(in_array($doc->id,$userdocs))
+            {{ 'yey'}}
+          @endif --}}
+          @foreach($doc->reqt as $docreq)
+          <p>
+            <input id="{{$doc->id . "-" . $docreq->id}}" type="checkbox" class="checkbox"
+              @if(in_array($docreq->id,$userdocs))
+                {{ "checked" }}
+              @endif --}}
+            />
+            <label for="{{$doc->id . "-" . $docreq->id}}">
+              {{$docreq->agency . " - " . $docreq->label}}
+            </label>
           </p>
+          @endforeach
         </form>
       </div>
       <div class="card-action">
         <a href="#">This is a link</a>
       </div>
     </div>
+
+      @endif
+    @endforeach
   </div>
 @endsection
