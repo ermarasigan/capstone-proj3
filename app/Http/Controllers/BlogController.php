@@ -23,6 +23,15 @@ class BlogController extends Controller
         // Get doc details
         $alldocs = Doc::all();
 
+        // Save doc reqts to an array
+        $docreqs = [];
+        $primary = $alldocs->where('icon','!=',null)->pluck('id')->toArray();
+        foreach ($primary as $key) {
+            $reqs = Doc::find($key)->reqt->pluck('id')->toArray();
+            $docreqs[$key] = $reqs;
+        }
+
+        // Save docs the user has
         if(Auth::user()) {
             $logged = Auth::user()->id;
             $userdocs = User::find($logged)->doc()->pluck('doc_id')->toArray();
@@ -31,7 +40,7 @@ class BlogController extends Controller
         }
 
         // Show blog view
-   	 	return view('blogs', compact('title','blogs','tags','alltags','alldocs','userdocs'));
+   	 	return view('blogs', compact('title','blogs','tags','alltags','alldocs','userdocs','primary','docreqs'));
     }
 
     public function removeTag(Request $request){

@@ -34,6 +34,9 @@
       $('#doc' + selected).removeClass('hide');
     });
 
+
+     $('.materialboxed').materialbox();
+
     // Token for post method
     token = $('#csrf').val();
 
@@ -212,20 +215,178 @@
     // AJAX Function to toggle doc checkbox
     $('.checkbox').click(function(){
       var docreqID = this.id;
+      checkboxID = docreqID.split('-');
+      docID = checkboxID[1];
+      reqID = checkboxID[2];
+
+      if(primary.includes(Number(reqID))){
+        if(userdocs.includes(Number(reqID))){
+          $('#' + docreqID).prop('checked','true')
+        } else {
+          $('#' + docreqID).removeAttr('checked')
+        }
+        Materialize.toast('Action not allowed',1000)
+      } else {
+
+        $.ajax({
+          url: "/toggleCheckbox",
+          method: "POST",
+          data: {
+            docreqID : docreqID,
+            _token    : token
+          },
+          success: function(data){
+            if (typeof data.response != 'undefined'){
+              if(data.response == 'success'){
+                userdocs = data.attached
+
+                $.each(primary, function( index, value ) {
+                  // Change pic depending if user has doc
+                  if(userdocs.includes(Number(value))){
+                    $('#img' + value).attr('src','/assets/images/doc' + value + 'pic_unlocked.jpg')
+                  } else {
+                    $('#img' + value).attr('src','/assets/images/doc' + value + 'pic_locked.jpg')
+                  }
+
+                  // Toggle checkbox if user has doc
+                  $.each(docreqs[value], function( index2, value2){
+                    eachID = '#req-' + value + '-' + value2
+                    if(userdocs.includes(Number(value2))){
+                      $(eachID).prop('checked','true')
+                    } else {
+                      $(eachID).removeAttr('checked')
+                    }
+                  })
+
+                  // Format action button for complete reqts
+                  actionID = '#action-' + value;
+                  var reqComplete = true;
+
+                  $.each(docreqs[value], function( index2, value2){
+                    if(!userdocs.includes(Number(value2))){
+                      reqComplete = false;
+                    }
+                  })
+
+                  // Action button for Document
+                  if(reqComplete){
+                    $(actionID).removeClass('grey')
+                    $(actionID).removeClass('blue')
+                    $(actionID).removeClass('teal')
+                    if(userdocs.includes(value)){
+                      // $(actionID).html('Complete')
+                      $(actionID).addClass('blue')
+                      $(actionID).html('Share to FB')
+                    } else {
+                      $(actionID).addClass('teal')
+                      $(actionID).html('Claim document')
+                    }
+                  } else {
+                    $(actionID).addClass('grey')
+                    $(actionID).html('Incomplete')
+                  }
+                });
+
+              } else {
+                if(data.response == 'notlogged'){
+                  Materialize.toast('Log in to save progress',1000)
+                }
+                else {
+                  console.log(data.response)          
+                }
+              }
+            } else {
+              console.log('no return')
+            }
+          },
+          error: function(response,data){
+            console.log(response)
+            console.log(data)
+          }
+        })
+      }
+    });
+
+    // AJAX Function to claim document
+    $('.docAction').click(function(){
+      var docActionID = this.id;
+      var docActionID = docActionID.split('-');
+      var docClaimID = docActionID[1];
+      var action = $('#action-' + docClaimID).html();
+
+      $('#addblog').submit()
+
+      if(action=='Share to FB'){
+        $('#addblog').click()
+      }
 
       $.ajax({
-        url: "/toggleCheckbox",
+        url: "/toggleClaimDoc",
         method: "POST",
         data: {
-          docreqID : docreqID,
+          docClaimID : docClaimID,
+          action    : action,
           _token    : token
         },
         success: function(data){
           if (typeof data.response != 'undefined'){
             if(data.response == 'success'){
+              userdocs = data.attached;
+
+              if(data.claimed=='yes'){
+                Materialize.toast('Achievement Unlocked!',1000)
+              }
+
+              $.each(primary, function( index, value ) {
+                // Change pic depending if user has doc
+                if(userdocs.includes(Number(value))){
+                  $('#img' + value).attr('src','/assets/images/doc' + value + 'pic_unlocked.jpg')
+                } else {
+                  $('#img' + value).attr('src','/assets/images/doc' + value + 'pic_locked.jpg')
+                }
+
+                // Toggle checkbox if user has doc
+                $.each(docreqs[value], function( index2, value2){
+                  eachID = '#req-' + value + '-' + value2
+                  if(userdocs.includes(Number(value2))){
+                    $(eachID).prop('checked','true')
+                  } else {
+                    $(eachID).removeAttr('checked')
+                  }
+                })
+
+                // Format action button for complete reqts
+                actionID = '#action-' + value;
+                var reqComplete = true;
+
+                $.each(docreqs[value], function( index2, value2){
+                  if(!userdocs.includes(Number(value2))){
+                    reqComplete = false;
+                  }
+                })
+
+                // Action button for Document
+                if(reqComplete){
+                  $(actionID).removeClass('grey')
+                  $(actionID).removeClass('blue')
+                  $(actionID).removeClass('teal')
+                  if(userdocs.includes(value)){
+                    // $(actionID).html('Complete')
+                    $(actionID).addClass('blue')
+                    $(actionID).html('Share to FB')
+                  } else {
+                    $(actionID).addClass('teal')
+                    $(actionID).html('Claim document')
+                  }
+                } else {
+                  $(actionID).addClass('grey')
+                  $(actionID).html('Incomplete')
+                }
+              });
+
             } else {
               if(data.response == 'notlogged'){
-                Materialize.toast('Log in to save progress',1000)
+                Materialize.toast('Log in to claim doc',1000)
               }
               else {
                 console.log(data.response)          

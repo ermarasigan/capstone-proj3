@@ -18,16 +18,16 @@
   {{-- FACEBOOK OPENGRAPH--}}
   <meta property="og:url"           content="http://readytogov.herokuapp.com/" />
   <meta property="og:type"          content="website" />
-  <meta property="og:title"         content="Your Website Title" />
-  <meta property="og:description"   content="Your description" />
-  <meta property="og:image"         content="http://www.your-domain.com/path/image.jpg" />
+  <meta property="og:title"         content="Ready to Gov" />
+  <meta property="og:description"   content="Keep track of your government doc applications and read blogs about government projects." />
+  <meta property="og:image"         content="http://readytogov.herokuapp.com/assets/images/readytogov.jpg" />
 
 </head>
 
 <body class="grey lighten-4">
 
   <!-- Load Facebook SDK for JavaScript -->
-{{--   <div id="fb-root"></div>
+  <div id="fb-root"></div>
   <script>
     (function(d, s, id) {
       var js, fjs = d.getElementsByTagName(s)[0];
@@ -36,14 +36,14 @@
       js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.10";
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
-  </script> --}}
+  </script>
 
   <!-- HEADER  -->
   @include("partials/_header")
-{{-- 
-  <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Share</a></div>
+
+  {{-- <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Share</a></div>
  --}}
-   {{-- <div class="fb-share-button" data-href="http://localhost:8000/" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="http://localhost:8000/">Share</a></div> --}}
+   <div id="fb-btn" class="fb-share-button" data-href="http://readytogov.herokuapp.com/" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="http://readytogov.herokuapp.com/">Share</a></div>
 
 
   <!-- MAIN SECTION  -->

@@ -33,6 +33,8 @@ Route::post('/fileUpload', 'BlogController@fileUpload');
 
 Route::post('/toggleCheckbox', 'DocController@toggleCheck');
 
+Route::post('/toggleClaimDoc', 'DocController@toggleClaimDoc');
+
 Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');

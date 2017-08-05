@@ -18,7 +18,7 @@
     @endif
     </b>
     @if(Auth::user() && Auth::user()->role == 'admin')
-      <a class="btn btn-floating blue waves-effect waves-light modal-trigger tooltipped" 
+      <a id="addblog" class="btn btn-floating blue waves-effect waves-light modal-trigger tooltipped" 
         data-position="right" data-delay="50" data-tooltip="Add Blog" href="#modal_add">
         <i class="material-icons">add</i>
       </a>
@@ -100,46 +100,7 @@
     </div>
 
     {{-- DOC CARD --}}
-    @foreach($alldocs as $doc)
-      @if(isset($doc->icon))
-        <div class="card docCard" id="{{ 'doc' . $doc->id}}">
-          <div class="card-image">
-            {{-- DOC IMAGE IS LOCKED OR UNLOCKED --}}
-            @if(in_array($doc->id,$userdocs))
-              <?php $lock = 'unlocked' ?>
-            @else
-              <?php $lock = 'locked' ?>
-            @endif
-            <img src=" {{ asset('assets/images/doc' . $doc->id . 'pic_' . $lock . '.jpg') }}">
-          </div>
-          <div class="card-content">
-            <span class="card-title center">
-              <i class="material-icons">{{$doc->icon}}</i>
-              {{ " " . $doc->label }}
-            </span>
-            <label>Requirements</label>
-            {{-- CHECKBOX FOR DOC REQUIREMENTS --}}
-            <form action="#">
-              @foreach($doc->reqt as $docreq)
-              <p>
-                <input id="{{ 'req-' . $doc->id . '-' . $docreq->id}}" type="checkbox" class="checkbox"
-                  @if(in_array($docreq->id,$userdocs))
-                    {{ "checked" }}
-                  @endif --}}
-                />
-                <label for="{{ 'req-' . $doc->id . '-' . $docreq->id}}">
-                  {{$docreq->agency . " - " . $docreq->label}}
-                </label>
-              </p>
-              @endforeach
-            </form>
-          </div>
-          <div class="card-action">
-            <a href="#">This is a link</a>
-          </div>
-        </div>
-      @endif
-    @endforeach {{-- /DOC CARD --}}
+    @include("partials/_docCard")
 
   </div> {{-- /ASIDE --}}
 @endsection
