@@ -46,7 +46,6 @@
       </div>
     </a>
   @endif
-
   
   {{-- HIDDEN INPUT FOR TOKEN --}}
   <input type="hidden" id="csrf" value={{csrf_token()}}></input>
@@ -104,7 +103,12 @@
       @if(isset($doc->icon))
         <div class="card docCard" id="{{ 'doc' . $doc->id}}">
           <div class="card-image">
-            <img src=" {{ asset('img/placeholder.png') }}">
+            @if(in_array($doc->id,$userdocs))
+              <?php $lock = 'unlocked' ?>
+            @else
+              <?php $lock = 'locked' ?>
+            @endif
+            <img src=" {{ asset('assets/images/doc' . $doc->id . 'pic_' . $lock . '.jpg') }}">
           </div>
           <div class="card-content">
             <span class="card-title center">
