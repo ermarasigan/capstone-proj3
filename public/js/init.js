@@ -18,8 +18,36 @@
     // Autoresize textarea
     $('.materialize-textarea').trigger('autoresize');
 
+    // Initialize select
+    $('select').material_select();
+
+    // Hide all doc cards
+    $('.docCard').addClass('hide');
+
+    // Show selected doc
+    selected = $('#docselect').val();
+    $('#doc' + selected).removeClass('hide');
+
+    $('#docselect').change(function(){
+      $('.docCard').addClass('hide');
+      selected = $('#docselect').val();
+      $('#doc' + selected).removeClass('hide');
+    });
+
+    // hide all the divs except the posttypes
+    // $('.image-link').not('.link-posttypes').hide();
+
+
+
+    // $('#wp_accordion_images_20110630022615_post_type').change(function() {
+    //     var divSelector = '.link-' + $(this).val();
+    //     $('.image-link').not('.link-posttypes').hide();
+    //     $(divSelector).show();
+    // });
+
     // Token for post method
     token = $('#csrf').val();
+
 
     // AJAX Function to create new Blog
     $('.newBlogBtn').click(function(){

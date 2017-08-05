@@ -24,6 +24,10 @@
       </a>
     @endif
   </h4>
+  <h6 class="teal-text center-align">Check out these government projects improving the lives of the Filipino people </h6>
+
+  {{-- DIVIDER LINE --}}
+  <div class="divider topdivider"></div>
 
   {{-- TAG CHIPS --}}
   TAGS 
@@ -43,8 +47,6 @@
     </a>
   @endif
 
-  {{-- DIVIDER LINE --}}
-  <div class="divider topdivider"></div>
   
   {{-- HIDDEN INPUT FOR TOKEN --}}
   <input type="hidden" id="csrf" value={{csrf_token()}}></input>
@@ -58,6 +60,7 @@
   {{-- PAGINATION LINKS --}}
   <div class="center">{{ $blogs->links() }}</div>
 
+  {{-- DIVIDER LINE --}}
   <div class="divider topdivider"></div>
 
   <h4 class="center-align cyan-text text-darken-3">
@@ -74,57 +77,62 @@
 
 {{-- ASIDE SECTION --}}
 @section("aside")
-  
-  
-
-    
       
   <div id="aside">
+    {{-- SECTION HEADING --}}
     <h4 class="center-align amber-text text-darken-1"><b>GUIDES</b></h4>
+    <h6 class="amber-text center-align">Sign in to keep track of your docs</h6>
+
+    {{-- DIVIDER LINE --}}
     <div class="divider topdivider"></div>
+    <h6><br></h6>
 
-    @foreach($alldocs as $doc)
-      @if(isset($doc->icon))
-
-    <div class="card" id="{{$doc->id}}">
-      <div class="card-image">
-        <img src=" {{ asset('img/placeholder.png') }}">
-        <span class="card-title align-center"><i class="material-icons">{{$doc->icon}}</i>{{ $doc->label }}</span>
-      </div>
-      <div class="card-content">
-        <form action="#">
-          {{-- <p>
-            <input type="checkbox" id="test5" {{ "checked" }}/>
-            <label for="test5">Reqt 1</label>
-          </p>
-          <p>
-            <input type="checkbox" id="test6" />
-            <label for="test6">Reqt 2</label>
-          </p> --}}
-          {{-- {{ $doc->reqt }}
-          @if(in_array($doc->id,$userdocs))
-            {{ 'yey'}}
-          @endif --}}
-          @foreach($doc->reqt as $docreq)
-          <p>
-            <input id="{{$doc->id . "-" . $docreq->id}}" type="checkbox" class="checkbox"
-              @if(in_array($docreq->id,$userdocs))
-                {{ "checked" }}
-              @endif --}}
-            />
-            <label for="{{$doc->id . "-" . $docreq->id}}">
-              {{$docreq->agency . " - " . $docreq->label}}
-            </label>
-          </p>
-          @endforeach
-        </form>
-      </div>
-      <div class="card-action">
-        <a href="#">This is a link</a>
-      </div>
+    {{-- DOCUMENT SELECT --}}
+    <div class="input-field">
+      <select id="docselect">
+        @foreach($alldocs as $doc)
+          @if(isset($doc->icon))
+            <option value="{{ $doc->id }}">{{ $doc->label }}</option>
+          @endif
+        @endforeach
+      </select>
+      <label>Choose a document</label>
     </div>
 
+    {{-- DOC CARD --}}
+    @foreach($alldocs as $doc)
+      @if(isset($doc->icon))
+        <div class="card docCard" id="{{ 'doc' . $doc->id}}">
+          <div class="card-image">
+            <img src=" {{ asset('img/placeholder.png') }}">
+          </div>
+          <div class="card-content">
+            <span class="card-title center">
+              <i class="material-icons">{{$doc->icon}}</i>
+              {{ " " . $doc->label }}
+            </span>
+            <label>Requirements</label>
+            <form action="#">
+              @foreach($doc->reqt as $docreq)
+              <p>
+                <input id="{{$doc->id . "-" . $docreq->id}}" type="checkbox" class="checkbox"
+                  @if(in_array($docreq->id,$userdocs))
+                    {{ "checked" }}
+                  @endif --}}
+                />
+                <label for="{{$doc->id . "-" . $docreq->id}}">
+                  {{$docreq->agency . " - " . $docreq->label}}
+                </label>
+              </p>
+              @endforeach
+            </form>
+          </div>
+          <div class="card-action">
+            <a href="#">This is a link</a>
+          </div>
+        </div>
       @endif
-    @endforeach
-  </div>
+    @endforeach {{-- /DOC CARD --}}
+
+  </div> {{-- /ASIDE --}}
 @endsection
