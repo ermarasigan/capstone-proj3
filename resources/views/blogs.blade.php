@@ -39,6 +39,7 @@
     </a>
   @endforeach
 
+  {{-- CHIP TO GO TO HOME PAGE --}}
   @if($title=='Tagged Blogs (Ready to Gov)')
     <a href="/">
       <div class="chip teal lighten-2">
@@ -103,6 +104,7 @@
       @if(isset($doc->icon))
         <div class="card docCard" id="{{ 'doc' . $doc->id}}">
           <div class="card-image">
+            {{-- DOC IMAGE IS LOCKED OR UNLOCKED --}}
             @if(in_array($doc->id,$userdocs))
               <?php $lock = 'unlocked' ?>
             @else
@@ -116,15 +118,16 @@
               {{ " " . $doc->label }}
             </span>
             <label>Requirements</label>
+            {{-- CHECKBOX FOR DOC REQUIREMENTS --}}
             <form action="#">
               @foreach($doc->reqt as $docreq)
               <p>
-                <input id="{{$doc->id . "-" . $docreq->id}}" type="checkbox" class="checkbox"
+                <input id="{{ 'req-' . $doc->id . '-' . $docreq->id}}" type="checkbox" class="checkbox"
                   @if(in_array($docreq->id,$userdocs))
                     {{ "checked" }}
                   @endif --}}
                 />
-                <label for="{{$doc->id . "-" . $docreq->id}}">
+                <label for="{{ 'req-' . $doc->id . '-' . $docreq->id}}">
                   {{$docreq->agency . " - " . $docreq->label}}
                 </label>
               </p>

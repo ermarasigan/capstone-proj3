@@ -34,17 +34,6 @@
       $('#doc' + selected).removeClass('hide');
     });
 
-    // hide all the divs except the posttypes
-    // $('.image-link').not('.link-posttypes').hide();
-
-
-
-    // $('#wp_accordion_images_20110630022615_post_type').change(function() {
-    //     var divSelector = '.link-' + $(this).val();
-    //     $('.image-link').not('.link-posttypes').hide();
-    //     $(divSelector).show();
-    // });
-
     // Token for post method
     token = $('#csrf').val();
 
@@ -54,7 +43,6 @@
       title = $('#newBlogTitle').val();
       content = $('#newBlogContent').val();
 
-      // Ajax function to add tag, post method
       $.ajax({
         url: "/newBlog",
         method: "POST",
@@ -88,84 +76,78 @@
 
     // AJAX Function to delete blog
     $('.deleteBlogBtn').click(function(){
-      // Save tag name from input
       var blogID = this.id;
 
-      // Ajax function to add tag, post method
-        $.ajax({
-          url: "/deleteBlog",
-          method: "POST",
-          data: {
-            blogID : blogID,
-            _token    : token
-          },
-          success: function(data){
-            console.log(data);
-            if (typeof data.response != 'undefined'){
-              if(data.response == 'success'){
-                
-                Materialize.toast('Blog deleted',1000)
-                setTimeout(function(){ location.reload(); }, 1000);
-              } else {
-                console.log(data.response)          
-              }
+      $.ajax({
+        url: "/deleteBlog",
+        method: "POST",
+        data: {
+          blogID : blogID,
+          _token    : token
+        },
+        success: function(data){
+          console.log(data);
+          if (typeof data.response != 'undefined'){
+            if(data.response == 'success'){
+              
+              Materialize.toast('Blog deleted',1000)
+              setTimeout(function(){ location.reload(); }, 1000);
             } else {
-              console.log('no return')
+              console.log(data.response)          
             }
-          },
-          error: function(response,data){
-            console.log(response)
-            console.log(data)
+          } else {
+            console.log('no return')
           }
-        })
+        },
+        error: function(response,data){
+          console.log(response)
+          console.log(data)
+        }
+      })
     });
 
     // AJAX Function to update blog
     $('.editBlogBtn').click(function(){
-      // Save tag name from input
       var blogID = this.id;
 
       editTitle = $('#edit_title' + blogID).val();
       editContent = $('#edit_content' + blogID).val();
 
-      // Ajax function to add tag, post method
-        $.ajax({
-          url: "/editBlog",
-          method: "POST",
-          data: {
-            blogID      : blogID,
-            editTitle   : editTitle,
-            editContent : editContent,
-            _token      : token
-          },
-          success: function(data){
-            console.log(data);
-            if (typeof data.response != 'undefined'){
-              if(data.response == 'success'){
-                $('#uploadimage' + blogID).submit();
-                Materialize.toast('Blog updated',2000)
-                // setTimeout(function(){ location.reload(); }, 1000);
-              } else {
-                console.log(data.response)          
-              }
+      $.ajax({
+        url: "/editBlog",
+        method: "POST",
+        data: {
+          blogID      : blogID,
+          editTitle   : editTitle,
+          editContent : editContent,
+          _token      : token
+        },
+        success: function(data){
+          console.log(data);
+          if (typeof data.response != 'undefined'){
+            if(data.response == 'success'){
+              $('#uploadimage' + blogID).submit();
+              Materialize.toast('Blog updated',2000)
+              // setTimeout(function(){ location.reload(); }, 1000);
             } else {
-              console.log('no return')
+              console.log(data.response)          
             }
-          },
-          error: function(response,data){
-            console.log(response)
-            console.log(data)
+          } else {
+            console.log('no return')
           }
-        })
+        },
+        error: function(response,data){
+          console.log(response)
+          console.log(data)
+        }
+      })
     });
 
     // AJAX Function to add tag
     $('.addTagBtn').click(function(){
-      // Save tag name from input
       var blogID = this.id;
       var inputTag = $('#add_tag' + blogID).val();
 
-      // Ajax function to add tag, post method
       $.ajax({
         url: "/addTag",
         method: "POST",
@@ -199,23 +181,20 @@
 
     // AJAX Function to remove tag
     $('.removeTagBtn').click(function(){
-      // Save tag name from input
       var blogtagID = this.id;
 
-      // Ajax function to add tag, post method
         $.ajax({
-          url: "removeTag",
+          url: "/removeTag",
           method: "POST",
           data: {
             blogtagID : blogtagID,
             _token    : token
           },
           success: function(data){
-            console.log(data);
             if (typeof data.response != 'undefined'){
               if(data.response == 'success'){
-                 Materialize.toast('Tag removed',1000)
-                  setTimeout(function(){ location.reload(); }, 1000);
+                Materialize.toast('Tag removed',1000)
+                setTimeout(function(){ location.reload(); }, 1000);
               } else {
                 console.log(data.response)          
               }
@@ -228,6 +207,39 @@
             console.log(data)
           }
         })
+    });
+
+    // AJAX Function to toggle doc checkbox
+    $('.checkbox').click(function(){
+      var docreqID = this.id;
+
+      $.ajax({
+        url: "/toggleCheckbox",
+        method: "POST",
+        data: {
+          docreqID : docreqID,
+          _token    : token
+        },
+        success: function(data){
+          if (typeof data.response != 'undefined'){
+            if(data.response == 'success'){
+            } else {
+              if(data.response == 'notlogged'){
+                Materialize.toast('Log in to save progress',1000)
+              }
+              else {
+                console.log(data.response)          
+              }
+            }
+          } else {
+            console.log('no return')
+          }
+        },
+        error: function(response,data){
+          console.log(response)
+          console.log(data)
+        }
+      })
     });
 
   }); // end of document ready

@@ -19,10 +19,7 @@ Route::get('/', 'BlogController@showBlogs');
 
 Route::get('/tag/{id}', 'TagController@showBlogs');
 
-Route::group(['middleware' => ['web']], function(){
-	Route::post('/removeTag', 'BlogController@removeTag');
-});
-Auth::routes();
+Route::post('/removeTag', 'BlogController@removeTag');
 
 Route::post('/newBlog', 'BlogController@newBlog');
 
@@ -33,5 +30,9 @@ Route::post('/editBlog', 'BlogController@editBlog');
 Route::post('/addTag', 'BlogController@addTag');
 
 Route::post('/fileUpload', 'BlogController@fileUpload');
+
+Route::post('/toggleCheckbox', 'DocController@toggleCheck');
+
+Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');

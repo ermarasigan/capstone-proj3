@@ -158,6 +158,7 @@ class BlogController extends Controller
         $newBlogID = Session::get('newBlogID');
         $updateBlogID = Session::get('updateBlogID');
 
+        // Image can be uploaded on create or update blog
         if(isset($newBlogID)){
             $blogID = $newBlogID;
         } else {
@@ -173,12 +174,10 @@ class BlogController extends Controller
             // Upload image with timestamp as filename
             $image = $request->file('image');
             $input['imagename'] = time().'.'. $image->getClientOriginalExtension();
-            // $destinationPath = public_path('img\uploads');
             $destinationPath = 'assets/images/';
             $image->move($destinationPath, $input['imagename']);
 
             // Update blog with the uploaded image
-            // $filename = "img/uploads/" . $input['imagename'];
             $filename = 'assets/images/' . $input['imagename'];
             $blog_tbu = Blog::find($blogID);
             $blog_tbu->image_url = $filename;
