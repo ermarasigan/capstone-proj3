@@ -49,13 +49,18 @@
     {{-- MODAL FOR ACHIEVEMENT UNLOCKED --}}
     <div id="{{ "modal_unlock" . $doc->id }}" class="modal center" style="z-index:1">
       <div class="modal-content">
-        {{-- <h4>
+        <h4 class="amber-text">
           COMPLETED: 
           {{ $doc->label }}
-        </h4> --}}
+        </h4>
         <img class="responsive-img" src=" {{ asset('assets/images/doc' . $doc->id . 'pic_unlocked.jpg') }}">
-        <a id="{{ $blog->id }}" href="#!" class="shareBtn modal-action modal-close waves-effect waves-blue blue btn">Share</a>
-        <a href="#!" class="modal-action modal-close waves-effect waves-grey grey btn">Close</a>
+        {{-- <a id="{{ $blog->id }}" href="#!" class="shareBtn modal-action modal-close waves-effect waves-blue blue btn">Share</a> --}}
+
+        {{-- Facebook Share --}}
+        <div class="fb-share-button" data-href="http://readytogov.herokuapp.com" data-layout="button" data-size="large" data-mobile-iframe="false">
+          <a class="fb-xfbml-parse-ignore  btn blue" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Freadytogov.herokuapp.com%2F&amp;src=sdkpreparse">Share</a>
+          <a href="#!" class="modal-action modal-close waves-effect waves-grey grey btn">Close</a>
+        </div>
       </div> 
     </div>
   @endif {{-- IF DOC HAS ICON --}}

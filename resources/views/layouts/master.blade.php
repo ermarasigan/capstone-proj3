@@ -43,10 +43,7 @@
 
   <!-- HEADER  -->
   @include("partials/_header")
-
-  {{-- Hide FB share button for launch version --}}
-  <div id="fb-btn" class="fb-share-button hide" data-href="http://readytogov.herokuapp.com/" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="http://readytogov.herokuapp.com/">Share</a></div>
-
+  
   <!-- MAIN SECTION  -->
   <main class="container">
     <div class="row">

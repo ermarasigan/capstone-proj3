@@ -302,6 +302,10 @@
 
               if(data.claimed=='yes'){
                 // Materialize.toast('Achievement Unlocked!',1000)
+                imageURL = 'http://readytogov.herokuapp.com/assets/images/doc' + docClaimID + 'pic_unlocked.jpg'
+                // $('meta[property="og:image"]').remove();
+                // $("head").append('<meta property="og:image" content=imageURL>');
+                $('meta[property="og:image"]').attr('content',imageURL)
                 $('#modal_unlock' + docClaimID).modal('open');
               }
 
