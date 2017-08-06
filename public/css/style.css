@@ -6,13 +6,16 @@
  * Made By MaterializeCSS.com
  */
 
+/*Icon Formatting*/
 .icon-block {
   padding: 0 15px;
 }
+
 .icon-block .material-icons {
 	font-size: inherit;
 }
 
+/*Aside Pushpin*/
 @media (min-width:992px) {
     #aside {
         width:250px;
@@ -26,22 +29,30 @@
     }
 }
 
+/*Divider Line*/
 .topdivider {
 	margin-bottom: 8px;
 }
 
+/*Card Image*/
 .card-image:hover {
     opacity: 0.7;
 }
 
+/*Button Formatting*/
 .btn {
     opacity: 0.5;
+}
+
+.btn.pulse {
+    opacity: 0.8;
 }
 
 .btn:hover {
     opacity: 1;
 }
 
+/*Pagination Format from Bootstrap*/
 .pagination>li>a,
 .pagination>li>a:active,
  .pagination>li>span {
@@ -68,4 +79,25 @@
     cursor: default;
     background-color: #337ab7;
     border-color: #337ab7;
+}
+
+/*Back to Top Button*/
+#topbtn {
+    display: none;    /* Hidden by default */
+    position: fixed; /* Fixed/sticky position */
+    bottom: 20px; /* Place the button at the bottom of the page */
+    right: 30px; /* Place the button 30px from the right */
+    z-index: 99; /* Make sure it does not overlap */
+    border: none; /* Remove borders */
+    outline: none; /* Remove outline */
+    background-color: rgba(308, 162, 14, 0.5); /* Set a background color */
+    color: white; /* Text color */
+    cursor: pointer; /* Add a mouse pointer on hover */
+    padding: 10px 17px; /* Some padding */
+    border-radius: 10px; /* Rounded corners */
+    font-size: 1.5em;
+}
+
+#topbtn:hover {
+    background-color: rgba(308, 162, 14, 1); 
 }

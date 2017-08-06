@@ -12,6 +12,7 @@
           <textarea id="newBlogContent" class="materialize-textarea" data-length="3000" required></textarea>
           <label for="newBlogContent">Blog Content</label>
         </div>
+        {{-- Image Upload --}}
         <form id="uploadimage" action="/fileUpload" method="post" enctype="multipart/form-data">
           {{ csrf_field() }}
           <div class="file-field input-field col s12">
@@ -25,6 +26,7 @@
           </div>
         </form>
       </div>
+      {{-- Modal Actions --}}
       <div class="center">
         <a href="#!" class="newBlogBtn modal-action waves-effect waves-green btn">Save</a>
         <a href="#!" class="modal-action modal-close waves-effect waves-green btn grey">Close</a>

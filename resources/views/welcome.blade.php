@@ -1,3 +1,5 @@
+{{-- This view is unused --}}
+
 <!doctype html>
 <html lang="{{ config('app.locale') }}">
     <head>

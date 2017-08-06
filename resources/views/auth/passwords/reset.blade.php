@@ -1,3 +1,5 @@
+{{-- This view is unused --}}
+
 @extends('layouts.app')
 
 @section('content')

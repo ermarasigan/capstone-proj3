@@ -1,3 +1,4 @@
+{{-- PRIMARY VIEW --}}
 
 @extends("../layouts/master")
 
@@ -67,6 +68,8 @@
     <b>INSPIRATION</b>  
   </h4>
 
+  <h6 class="teal-text center-align">Difficulty is opportunity. Don't give up just yet. </h6>
+
   {{-- QUOTEFANCY CAROUSEL --}}  
   @include("partials/_carousel")
 
@@ -80,8 +83,14 @@
       
   <div id="aside">
     {{-- SECTION HEADING --}}
-    <h4 class="center-align amber-text text-darken-1"><b>GUIDES</b></h4>
-    <h6 class="amber-text center-align">Sign in to keep track of your docs</h6>
+    <h4 class="center-align amber-text text-darken-2"><b>GUIDES</b></h4>
+    <h6 class="amber-text text-darken-2 center-align">
+      @if(Auth::user())
+        {{ 'Welcome back, ' . Auth::user()->name . '!' }}
+      @else
+        {{ 'Sign in to keep track of your docs' }}
+      @endif
+    </h6>
 
     {{-- DIVIDER LINE --}}
     <div class="divider topdivider"></div>
@@ -101,6 +110,48 @@
 
     {{-- DOC CARD --}}
     @include("partials/_docCard")
+
+
+    {{-- CAREERS SECTION --}}
+    <h4 class="center-align amber-text text-darken-2"><b>CAREERS</b></h4>
+    <h6 class="amber-text text-darken-2 center-align">Consider serving in the country's largest employer - the government.</h6>
+
+    <div class="divider topdivider"></div>
+    <h6><br></h6>
+
+    {{-- Career Accordion --}}
+    <ul class="collapsible" data-collapsible="accordion">
+    <li>
+      <div class="collapsible-header active">
+        <i class="material-icons">flag</i>Gov.ph
+      </div>
+      <div class="collapsible-body">
+        <a href="https://www.gov.ph/job-vacancies" target="_blank">
+          <img class="responsive-img" src=" {{ asset('assets/images/govph.jpg') }}">
+        </a>
+      </div>
+    </li>
+    <li>
+      <div class="collapsible-header">
+        <i class="material-icons">nature_people</i>Jobstreet
+      </div>
+      <div class="collapsible-body">
+        <a href="https://www.jobstreet.com.ph/government" target="_blank">
+          <img class="responsive-img" src=" {{ asset('assets/images/jobstreet.jpg') }}">
+        </a>
+      </div>
+    </li>
+    <li>
+      <div class="collapsible-header">
+        <i class="material-icons">business</i>Kalibrr
+      </div>
+      <div class="collapsible-body">
+        <a href="https://www.kalibrr.com/discover/industry/govph" target="_blank">
+          <img class="responsive-img" src=" {{ asset('assets/images/kalibrr.jpg') }}">
+        </a>
+      </div>
+    </li>
+  </ul>
 
   </div> {{-- /ASIDE --}}
 @endsection

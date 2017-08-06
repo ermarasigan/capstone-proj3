@@ -27,6 +27,7 @@
           <label for="textarea1">Blog Content</label>
         </div>
 
+        {{-- Image Upload --}}
         <form id="{{ "uploadimage" . $blog->id }}" action="/fileUpload" method="post" enctype="multipart/form-data">
           {{ csrf_field() }}
           <div class="file-field input-field col s12">
@@ -40,6 +41,7 @@
           </div>
         </form>
       </div>
+    {{-- Modal Actions --}}
     <div class="center">
       <a id="{{ $blog->id }}" href="#!" class="editBlogBtn modal-action waves-effect waves-green btn center-align">Save</a>
       <a href="#!" class="modal-action modal-close waves-effect waves-green btn center-align grey">Close</a>

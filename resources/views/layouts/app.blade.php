@@ -1,3 +1,5 @@
+{{-- This view is unused --}}
+
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 <head>

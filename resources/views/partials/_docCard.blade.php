@@ -44,15 +44,31 @@
           <button id="{{ 'action-' . $doc->id}}" class="btn grey docAction">Incomplete</button>
         </div>
       @endif
-    </div>
-  @endif
-@endforeach {{-- /DOC CARD --}}
+    </div> {{-- DOC CARD --}}
 
+    {{-- MODAL FOR ACHIEVEMENT UNLOCKED --}}
+    <div id="{{ "modal_unlock" . $doc->id }}" class="modal center" style="z-index:1">
+      <div class="modal-content">
+        {{-- <h4>
+          COMPLETED: 
+          {{ $doc->label }}
+        </h4> --}}
+        <img class="responsive-img" src=" {{ asset('assets/images/doc' . $doc->id . 'pic_unlocked.jpg') }}">
+        <a id="{{ $blog->id }}" href="#!" class="shareBtn modal-action modal-close waves-effect waves-blue blue btn">Share</a>
+        <a href="#!" class="modal-action modal-close waves-effect waves-grey grey btn">Close</a>
+      </div> 
+    </div>
+  @endif {{-- IF DOC HAS ICON --}}
+
+@endforeach {{-- LOOP FOR ALL DOCS --}}
+
+
+{{-- SCRIPT FOR INITIAL VIEW OF DOCS --}}
 <script type="text/javascript">
   (function($){
     $(function(){
       
-      // SAVE VALUES TO FROM VIEW FOR JQUERY USE
+      // SAVE VALUES FROM VIEW FOR JQUERY USE
       primary={!! json_encode($primary) !!}
       docreqs={!! json_encode($docreqs) !!}
       userdocs={!! json_encode($userdocs) !!}

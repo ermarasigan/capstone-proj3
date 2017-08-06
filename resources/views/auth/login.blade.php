@@ -7,6 +7,7 @@
             <div class="panel panel-default">
                 {{-- <div class="panel-heading">Login</div> --}}
                 <div class="panel-body">
+                    {{-- LOG IN FORM --}}
                     <form class="form-horizontal" method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }}
 
@@ -40,7 +41,8 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        {{-- Hide Remember Checkbox --}}
+                       {{--  <div class="form-group input-field ">
                             <div class="col-md-6 col-md-offset-4">
                                 <div class="checkbox">
                                     <label>
@@ -48,7 +50,7 @@
                                     </label>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
@@ -56,12 +58,23 @@
                                     Login
                                 </button>
 
+                                {{-- Hide Password Reset --}}
                                 {{-- <a class="btn btn-link" href="{{ route('password.request') }}">
                                     Forgot Your Password?
                                 </a> --}}
                             </div>
                         </div>
-                    </form>
+                    </form> {{-- LOG IN FORM --}}
+
+                    {{-- Register Button --}}
+                    <h6><br></h6>
+                    <label>Not yet a member?</label>
+                    <div>
+                        <a href="{{ route('register') }} " class="btn amber btn-primary">
+                            Register
+                        </a>
+                    </div>
+                        
                 </div>
             </div>
         </div>

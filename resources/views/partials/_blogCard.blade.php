@@ -1,5 +1,6 @@
 {{-- BLOG CARD PARTIAL--}}
 
+{{-- Format blog content into paragraphs --}}
 <?php
   $content_data = explode("\n", $blog->content);
   $content_first = $content_data[0];
@@ -28,14 +29,14 @@
         <a href="/tag/{{$blogtag->id}}">
           {{$blogtag->name}}
         </a>
-          <i id="{{$blog->id . "-" . $blogtag->id}}" 
-            class="close material-icons removeTagBtn
-            @if($title=='Tagged Blogs (Ready to Gov)')
-              {{ "hide" }}
-            @endif
-            ">
-            close
-          </i>
+        <i id="{{$blog->id . "-" . $blogtag->id}}" 
+          class="close material-icons removeTagBtn
+          @if($title=='Tagged Blogs (Ready to Gov)')
+            {{ "hide" }}
+          @endif
+          ">
+          close
+        </i>
       </div>
     @endforeach
     {{-- BLOG 1ST PARAGRAPH --}}
@@ -82,6 +83,7 @@
 
 <h5><br></h5>
 
+{{-- For autocomplete of tags --}}
 <script type="text/javascript">
 
   (function($){
