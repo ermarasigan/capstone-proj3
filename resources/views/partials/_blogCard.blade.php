@@ -29,14 +29,12 @@
         <a href="/tag/{{$blogtag->id}}">
           {{$blogtag->name}}
         </a>
-        <i id="{{$blog->id . "-" . $blogtag->id}}" 
-          class="close material-icons removeTagBtn
-          @if($title=='Tagged Blogs (Ready to Gov)' || Auth::user()->role != 'admin')
-            {{ "hide" }}
-          @endif
-          ">
-          close
-        </i>
+        @if(Auth::user() && Auth::user()->role == 'admin' && $title=='Homepage (Ready to Gov)')
+          <i id="{{$blog->id . "-" . $blogtag->id}}" 
+            class="close material-icons removeTagBtn">
+            close
+          </i>
+        @endif
       </div>
     @endforeach
     {{-- BLOG 1ST PARAGRAPH --}}
