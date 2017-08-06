@@ -31,7 +31,7 @@
         </a>
         <i id="{{$blog->id . "-" . $blogtag->id}}" 
           class="close material-icons removeTagBtn
-          @if($title=='Tagged Blogs (Ready to Gov)')
+          @if($title=='Tagged Blogs (Ready to Gov)' || Auth::user()->role != 'admin')
             {{ "hide" }}
           @endif
           ">
